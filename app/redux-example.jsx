@@ -43,6 +43,16 @@ var reducer = (state = stateDefault, action) => {
             }
           ]
         };
+      case 'REMOVE_HOBBY':
+        return {
+          ...state,
+          hobbies: state.hobbies.filter( (hobby) => hobby.id !== action.id )
+        };
+      case 'REMOVE_MOVIE':
+        return {
+          ...state,
+          movies: state.movies.filter( (movie) => movie.id !== action.id )
+        };
       default:
         return state;
   }
@@ -64,6 +74,8 @@ var unsubscribe = store.subscribe(() => {
 
 console.log( 'currentState: ', store.getState() );
 
+
+// add/update calls 
 store.dispatch({
   type: 'CHANGE_NAME',
   name: 'Dustin'
@@ -95,4 +107,20 @@ store.dispatch({
   type: 'ADD_MOVIE',
   title: 'Something About Mary',
   genre: 'Comedy'
+});
+
+store.dispatch({
+  type: 'ADD_HOBBY',
+  hobby: 'Coding'
+});
+
+// remove calls
+store.dispatch({
+  type: 'REMOVE_HOBBY',
+  id: 2
+});
+
+store.dispatch({
+  type: 'REMOVE_MOVIE',
+  id: 3
 });
