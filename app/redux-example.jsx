@@ -19,13 +19,27 @@ var reducer = (state = stateDefault, action) => {
         return state;
   }
 };
-var store = redux.createStore(reducer);
+var store = redux.createStore(reducer, redux.compose(
+  //debugger for redux as chrome extention
+  window.devToolsExtention ? window.devToolsExtention() : f => f
+));
 
-console.log('currentState: ', store.getState());
+//subscribe to changes
+var unsubscribe = store.subscribe(() => {
+  var state = store.getState();
+  console.log('Name is: ', state.name);
+  document.getElementById('name').innerHTML = state.name;
+});
+// unsubscribe();
+
+console.log( 'currentState: ', store.getState() );
 
 store.dispatch({
   type: 'CHANGE_NAME',
   name: 'Dustin'
 });
 
-console.log('name should be Dustin', store.getState());
+store.dispatch({
+  type: 'CHANGE_NAME',
+  name: 'Kriston'
+});
