@@ -6,7 +6,7 @@ var About = React.createClass({
     	<div className="text-center">
     		<h2 className="page-title">About Component</h2>
         <h3> Name state is: <strong id='name'></strong></h3>
-        <p> View the console, to see the state value</p>
+        <p> View the console, to see more info on Redux state</p>
     	</div>);
   }
 });
